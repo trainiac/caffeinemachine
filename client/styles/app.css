@@ -1,0 +1,14 @@
+#root {
+  height: 100%;
+}
+
+#reactRoot {
+  height: 100%;
+}
+
+/* WebKit and Opera browsers */
+@-webkit-keyframes spinner {
+  from { top: 0px;    }
+  to   { top: -240px; }
+}
+
