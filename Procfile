@@ -1,1 +1,1 @@
-./node_modules/.bin/babel-node server/app.js
+node serverBuild/app.js

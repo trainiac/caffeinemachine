@@ -31,7 +31,7 @@ app.use(webpackHotMiddleware(compiler))
 
 app.use(
   favicon(
-    path.join(__dirname, '/favicon.ico')
+    path.join(__dirname, '../client/favicon.ico')
   )
 )
 app.use(logger('dev'))
@@ -53,7 +53,7 @@ app.use(
 
 // add html route
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, '/index.html'))
+  res.sendFile(path.join(__dirname, '../client/index.html'))
 })
 
 // ajax routes

@@ -12,7 +12,12 @@
     "url": "https://github.com/adrian/caffeinemachine/issues"
   },
   "scripts": {
-    "start": "babel-node server/app.js",
+    "devStart": "babel-node --debug server/app.js",
+    "clean": "rm -rf serverBuild && mkdir serverBuild",
+    "build-server": "babel -d ./serverBuild ./server -s",
+    "build": "npm run clean && npm run build-server",
+    "start": "node ./serverBuild/app.js",
+    "debug": "node --debug ./serverBuild/app.js",
     "test": "mocha",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
     "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
