@@ -1,40 +1,42 @@
+/* eslint-disable no-var, object-shorthand */
+
 var path = require('path')
-var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
+var buildPath = path.join(__dirname, 'build')
+var clientSrcPath = path.join(__dirname, 'client')
+var clientBuildPath = path.join(buildPath, 'client')
+var staticSrcPath = path.join(clientSrcPath, 'static')
 
 module.exports = {
-    devtool: 'inline-source-map',
-    entry: [
-        'webpack-hot-middleware/client',
-        'webpack/hot/only-dev-server',
-        'react-hot-loader/patch',
-        './client/index.js'
-    ],
-    output: {
-        path: path.join(__dirname, 'build'),
-        filename: 'bundle.js',
-        publicPath: '/static/'
-    },
-    plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
-        new ExtractTextPlugin('styles.css'),
-        new CopyWebpackPlugin([{ from: path.join(__dirname, 'client/static') }]),
-    ],
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                loaders: ['babel'],
-                exclude: /node_modules/,
-                include: path.join(__dirname, 'client')
-            },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract("css")
-            }
-        ]
-    }
+  buildPath: buildPath,
+  clientSrcPath: clientSrcPath,
+  clientBuildPath: clientBuildPath,
+  entry: [
+    path.join(clientSrcPath, 'app.js')
+  ],
+  output: {
+    path: clientBuildPath,
+    filename: 'bundle.js',
+    publicPath: '/static'
+  },
+  plugins: [
+    new ExtractTextPlugin('styles.css'),
+    new CopyWebpackPlugin([
+      { from: path.join(staticSrcPath, 'index.html'), to: buildPath },
+      { from: path.join(staticSrcPath, 'favicon.ico'), to: buildPath },
+      { from: path.join(staticSrcPath, 'images'), to: path.join(clientBuildPath, 'images') }
+    ])
+  ],
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      exclude: /node_modules/,
+      include: clientSrcPath
+    }, {
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('css')
+    }]
+  }
 }

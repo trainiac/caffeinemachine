@@ -12,12 +12,12 @@
     "url": "https://github.com/adrian/caffeinemachine/issues"
   },
   "scripts": {
-    "devStart": "babel-node --debug server/app.js",
-    "clean": "rm -rf serverBuild && mkdir serverBuild",
-    "build-server": "babel -d ./serverBuild ./server -s",
-    "build": "npm run clean && npm run build-server",
-    "start": "node ./serverBuild/app.js",
-    "debug": "node --debug ./serverBuild/app.js",
+    "develop": "babel-node --debug server/app.dev.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-server": "babel -d ./build/server ./server -s",
+    "build-client": "webpack --config webpack.prod.config.js",
+    "build": "npm run clean && npm run build-server && npm run build-client",
+    "start": "node ./build/server/app.prod.js",
     "test": "mocha",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
     "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
@@ -70,7 +70,6 @@
     "babel-preset-es2015-node5": "1.2.0",
     "babel-preset-react": "6.16.0",
     "copy-webpack-plugin": "3.0.1",
-    "css-loader": "0.25.0",
     "eslint": "3.7.1",
     "eslint-plugin-react": "6.4.1",
     "extract-text-webpack-plugin": "1.0.1",
@@ -82,7 +81,6 @@
     "redux-devtools-log-monitor": "1.0.11",
     "should": "4.6.5",
     "sinon": "1.17.6",
-    "style-loader": "0.13.1",
     "webpack": "1.13.2",
     "webpack-dev-middleware": "1.8.4",
     "webpack-hot-middleware": "2.13.0"

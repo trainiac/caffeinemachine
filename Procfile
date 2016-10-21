@@ -1,1 +1,1 @@
-node serverBuild/app.js
+npm run start

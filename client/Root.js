@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Router, Route, IndexRoute } from 'react-router'
 import { Provider } from 'react-redux'
-import DevTools from './components/DevTools'
 import CaffeineMachine from './containers/CaffeineMachine'
 import App from './containers/App'
 
@@ -16,7 +15,7 @@ export default class Root extends Component {
                 <IndexRoute component={CaffeineMachine} />
               </Route>
           </Router>
-          <DevTools/>
+          {this.props.persistentComponents}
         </div>
       </Provider>
     )
