@@ -1,8 +1,4 @@
-#root {
-  height: 100%;
-}
-
-#reactRoot {
+#root, #devRoot {
   height: 100%;
 }
 

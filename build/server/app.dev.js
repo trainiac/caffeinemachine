@@ -24,6 +24,10 @@ var _webpackDev = require('../webpack.dev.config');
 
 var _webpackDev2 = _interopRequireDefault(_webpackDev);
 
+var _config = require('../config.dev');
+
+var _config2 = _interopRequireDefault(_config);
+
 var _app = require('./app');
 
 var _app2 = _interopRequireDefault(_app);
@@ -39,15 +43,14 @@ console.log('configuring dev');
 console.log('configuring webpack middleware');
 app.use((0, _webpackDevMiddleware2.default)(compiler, {
   noInfo: true,
-  publicPath: _webpackDev2.default.output.publicPath
+  publicPath: _config2.default.staticPublicPath
 }));
 
 console.log('configuring webpack hot reloader');
 app.use((0, _webpackHotMiddleware2.default)(compiler));
 app = (0, _app2.default)(app, {
-  webpackConfig: _webpackDev2.default,
-  loggerLevel: 'dev',
-  staticSrcPath: _webpackDev2.default.staticSrcPath
+  config: _config2.default,
+  loggerLevel: 'dev'
 });
 // start app
 app.listen(port, error => {

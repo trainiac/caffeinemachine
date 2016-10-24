@@ -4,6 +4,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 
 import webpackConfig from '../webpack.dev.config'
+import config from '../config.dev'
 import configureApp from './app'
 
 let app = express()
@@ -18,7 +19,7 @@ app.use(
     compiler,
     {
       noInfo: true,
-      publicPath: webpackConfig.output.publicPath
+      publicPath: config.staticPublicPath
     }
   )
 )
@@ -26,9 +27,8 @@ app.use(
 console.log('configuring webpack hot reloader')
 app.use(webpackHotMiddleware(compiler))
 app = configureApp(app, {
-  webpackConfig,
-  loggerLevel: 'dev',
-  staticSrcPath: webpackConfig.staticSrcPath
+  config,
+  loggerLevel: 'dev'
 })
 // start app
 app.listen(port, error => {

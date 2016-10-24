@@ -1,22 +1,36 @@
 /* eslint-disable no-var, object-shorthand */
 
 var path = require('path')
-var buildPath = path.join(__dirname, 'build')
-var clientSrcPath = path.join(__dirname, 'client')
-var clientBuildPath = path.join(buildPath, 'client')
-var staticSrcPath = path.join(clientSrcPath, 'static')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
+var config = require('./config')
 
 module.exports = {
-  buildPath: buildPath,
-  clientSrcPath: clientSrcPath,
-  clientBuildPath: clientBuildPath,
-  staticSrcPath: staticSrcPath,
   entry: [
-    path.join(clientSrcPath, 'app.js')
+    path.join(config.clientSrcPath, 'app.js')
   ],
   output: {
-    path: clientBuildPath,
+    path: config.clientBuildPath,
     filename: 'bundle.js',
-    publicPath: '/static'
+    publicPath: config.staticPublicPath
+  },
+  plugins: [
+    new ExtractTextPlugin('styles.css'),
+    new CopyWebpackPlugin([
+      { from: path.join(config.staticSrcPath, 'index.html'), to: config.buildPath },
+      { from: path.join(config.staticSrcPath, 'favicon.ico'), to: config.buildPath },
+      { from: path.join(config.staticSrcPath, 'images'), to: path.join(config.clientBuildPath, 'images') }
+    ])
+  ],
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      exclude: /node_modules/,
+      include: config.clientSrcPath
+    }, {
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('css')
+    }]
   }
 }

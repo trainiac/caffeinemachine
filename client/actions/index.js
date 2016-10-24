@@ -15,8 +15,7 @@ export default playTime => (dispatch, getState) => {
     setTimeout(() => {
       const state = getState()
       const results = getNewCaffeineMachineResults(state)
-      let action = receivedResults(results)
-      action = dispatch(action)
+      const action = dispatch(receivedResults(results))
       resolve(action)
     }, playTime)
   })

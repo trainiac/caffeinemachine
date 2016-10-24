@@ -1,6 +1,6 @@
 import express from 'express'
 import configureApp from './app'
-import webpackConfig from '../../webpack.config'
+import config from '../../config.prod'
 
 let app = express()
 const defaultPort = 5000
@@ -8,9 +8,8 @@ const port = Number(process.env.PORT || defaultPort)
 const appUrl = process.env.APP_URL || `http://localhost:${port}/`
 
 app = configureApp(app, {
-  webpackConfig,
-  loggerLevel: 'combined',
-  staticSrcPath: webpackConfig.buildPath
+  config,
+  loggerLevel: 'combined'
 })
 // start app
 app.listen(port, error => {

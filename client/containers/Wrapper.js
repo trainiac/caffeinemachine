@@ -1,8 +1,7 @@
-import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import classNames from './App.styles.js'
+import classNames from './Wrapper.styles.js'
 
-class App extends Component {
+export default class Wrapper extends Component {
   render() {
     return (
       <div className={classNames.appContainer}>
@@ -11,5 +10,3 @@ class App extends Component {
     )
   }
 }
-
-export default connect()(App)

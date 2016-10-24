@@ -4,38 +4,34 @@ import React from 'react'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-import { createStore } from 'redux'
-import rootReducer from './reducers'
-import storeEnhancer from './enhancers'
+import { AppContainer } from 'react-hot-loader'
+import configureStore from './stores/configureStore'
+import Root from './containers/Root'
 
-const store = createStore(rootReducer, storeEnhancer)
+const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
 
-let Root
+render(
+  <AppContainer>
+    <Root
+      store={ store }
+      history={ history }
+    />
+  </AppContainer>,
+  document.getElementById('root')
+)
 
-const mount = () => {
-  render(
-    <Root store={store} history={history} />,
-    document.getElementById('root')
-  )
-}
-
-if (process.env.NODE_ENV === 'prod') {
-  Root = require('./Root.js').default // eslint-disable-line global-require
-} else {
-  Root = require('./Root.dev.js').default // eslint-disable-line global-require
-}
-
-mount()
-
-if (process.env.NODE_ENV === 'dev') {
-  if (module.hot) {
-    module.hot.accept('./Root.dev.js', () => {
-      mount()
-    })
-
-    module.hot.accept('./reducers', () =>
-      store.replaceReducer(require('./reducers').default) // eslint-disable-line global-require
+if (module.hot) {
+  module.hot.accept('./containers/Root', () => {
+    const RootContainer = require('./containers/Root').default // eslint-disable-line global-require
+    render(
+      <AppContainer>
+        <RootContainer
+          store={ store }
+          history={ history }
+        />
+      </AppContainer>,
+      document.getElementById('root')
     )
-  }
+  })
 }

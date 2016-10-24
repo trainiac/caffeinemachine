@@ -1,7 +1,7 @@
 /* eslint-disable no-var */
 
 var webpack = require('webpack')
-var config = require('./webpack.build.config.js')
+var config = require('./webpack.config.js')
 
 config.devtool = 'inline-source-map'
 config.entry.unshift(
@@ -15,7 +15,7 @@ config.plugins.push(
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('dev')
+        NODE_ENV: JSON.stringify('development')
       }
     })
 )

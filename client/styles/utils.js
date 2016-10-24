@@ -53,13 +53,11 @@ const createStyleSheet = context => {
 }
 
 const wrapGetStateFunc = (context, className, getStateFunc) => (...args) => {
-  let computedClassNames = getStateFunc(...args)
-  computedClassNames = _.filter(item => item)(computedClassNames)
-  computedClassNames = [className, ...computedClassNames]
+  const computedClassNames = [className, ..._.compact(getStateFunc(...args))]
   const classNameStyleSheets = _.map(
     stateClassNameToStyleSheetStyles(className, context)
   )(computedClassNames)
-  return Reflect.apply(css, undefined, classNameStyleSheets)
+  return css(...classNameStyleSheets)
 }
 
 const createClassNameAccessor = context => {
@@ -76,7 +74,7 @@ const createClassNameAccessor = context => {
       if (helperStyleSheetStyles) {
         stylesToApply = stylesToApply.concat(helperStyleSheetStyles)
       }
-      accessor[className] = Reflect.apply(css, undefined, stylesToApply)
+      accessor[className] = css(...stylesToApply)
     }
   })(context.cssStyles)
 

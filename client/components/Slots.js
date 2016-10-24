@@ -63,9 +63,9 @@ export default ({ results, slots, isPlaying }) =>
   <div className={classNames.slotsContainer}>
     <div className={classNames.innerSlotContainer}>{
       slots.map((slot, slotIndex) =>
-        <div className={classNames.slotWrapper}>
-          <div key={`slot-${slotIndex}`} className={classNames.slot}>
-            <div key={`outcomeReel-${slotIndex}`} className={classNames.outcomeReel(isPlaying)} >{
+        <div key={`slot-${slotIndex}`} className={classNames.slotWrapper}>
+          <div className={classNames.slot}>
+            <div className={classNames.outcomeReel(isPlaying)} >{
 
               slot.map((outcome, outcomeIndex) =>
                 <div key={`outcome-${outcomeIndex}-${slotIndex}`}
@@ -74,7 +74,6 @@ export default ({ results, slots, isPlaying }) =>
                      )}
                 >{
                   <img
-                    key={`outcomeImg-${outcomeIndex}-${slotIndex}`}
                     className={classNames.outcomeImg}
                     {...outcomeImgProps[outcome.category][outcome.type]}
                   />

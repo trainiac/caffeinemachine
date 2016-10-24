@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import _ from 'lodash/fp'
 
 const initialState = {
   isPlaying: false,
@@ -37,29 +38,33 @@ const initialState = {
   hasPlayed: false
 }
 
-initialState.results = initialState.slots.map(slot => slot[0])
+initialState.results = _.map(_.head)(initialState.slots)
+
+const resultsDidWin = _.flow(
+  _.map(_.property('category')),
+  _.uniq,
+  _.size,
+  _.eq(1)
+)
+
+const getFirstCategory = _.flow(
+  _.head,
+  _.property('category')
+)
 
 export const getWonBeverage = state => {
   if (!state.hasPlayed) {
     return null
   }
 
-  const categories = state.results.map(result => result.category)
-  const didWin = categories.every(category => category === categories[0])
-  if (didWin) {
-    return categories[0]
+  if (resultsDidWin(state.results)) {
+    return getFirstCategory(state.results)
   }
 
   return null
 }
 
-export const getResults = state => {
-  const results = state.slots.map(
-    slot => Math.floor(Math.random() * slot.length)
-  )
-  // const results = [1, 1, 1]
-  return results.map((outcomeIndex, slotIndex) => state.slots[slotIndex][outcomeIndex])
-}
+export const getResults = state => _.map(_.sample)(state.slots)
 
 const hasPlayed = (state = initialState.hasPlayed, action) => {
   const type = action.type

@@ -5,13 +5,12 @@ import favicon from 'serve-favicon'
 import logger from 'morgan'
 import path from 'path'
 
-import apiRoutes from './routes/api'
 import getErrorHandlers from './routes/error'
 
 
 export default (app, settings) => {
-  const { webpackConfig, staticSrcPath, loggerLevel } = settings
-  const faviconFile = path.join(staticSrcPath, 'favicon.ico')
+  const { config, loggerLevel } = settings
+  const faviconFile = path.join(config.serveStaticPath, 'favicon.ico')
   console.log(`configuring favicon ${faviconFile}`)
   app.use(favicon(faviconFile))
 
@@ -30,25 +29,20 @@ export default (app, settings) => {
   app.use(cookieParser())
 
   console.log('configuring static routes')
-  console.log(`webpack config: build path ${webpackConfig.clientBuildPath}`)
-  console.log(`webpack config: src path ${webpackConfig.clientSrcPath}`)
-  console.log(`webpack config: public path ${webpackConfig.output.publicPath}`)
+  console.log(`config: build path ${config.clientBuildPath}`)
+  console.log(`config: src path ${config.clientSrcPath}`)
+  console.log(`config: public path ${config.staticPublicPath}`)
   app.use(
-    webpackConfig.output.publicPath,
-    express.static(webpackConfig.clientBuildPath)
+    config.staticPublicPath,
+    express.static(config.clientBuildPath)
   )
   // the public path is defined in webpack.config.js
 
-
-  const htmlFile = path.join(staticSrcPath, 'index.html')
+  const htmlFile = path.join(config.serveStaticPath, 'index.html')
   console.log(`configuring html wildcard route ${htmlFile}`)
   app.use((req, res) => {
     res.sendFile(htmlFile)
   })
-
-  console.log('configuring apiRoutes')
-  app.use('/api/', apiRoutes)
-
 
   console.log('configuring error handlers')
   app.use(getErrorHandlers(app))

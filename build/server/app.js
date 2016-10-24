@@ -28,10 +28,6 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-var _api = require('./routes/api');
-
-var _api2 = _interopRequireDefault(_api);
-
 var _error = require('./routes/error');
 
 var _error2 = _interopRequireDefault(_error);
@@ -39,11 +35,10 @@ var _error2 = _interopRequireDefault(_error);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (app, settings) => {
-  const webpackConfig = settings.webpackConfig;
-  const staticSrcPath = settings.staticSrcPath;
+  const config = settings.config;
   const loggerLevel = settings.loggerLevel;
 
-  const faviconFile = _path2.default.join(staticSrcPath, 'favicon.ico');
+  const faviconFile = _path2.default.join(config.serveStaticPath, 'favicon.ico');
   console.log(`configuring favicon ${ faviconFile }`);
   app.use((0, _serveFavicon2.default)(faviconFile));
 
@@ -60,21 +55,17 @@ exports.default = (app, settings) => {
   app.use((0, _cookieParser2.default)());
 
   console.log('configuring static routes');
-  console.log(`webpack config: build path ${ webpackConfig.clientBuildPath }`);
-  console.log(`webpack config: src path ${ webpackConfig.clientSrcPath }`);
-  console.log(`webpack config: public path ${ webpackConfig.output.publicPath }`);
-  app.use(webpackConfig.output.publicPath, _express2.default.static(webpackConfig.clientBuildPath));
+  console.log(`config: build path ${ config.clientBuildPath }`);
+  console.log(`config: src path ${ config.clientSrcPath }`);
+  console.log(`config: public path ${ config.staticPublicPath }`);
+  app.use(config.staticPublicPath, _express2.default.static(config.clientBuildPath));
   // the public path is defined in webpack.config.js
 
-
-  const htmlFile = _path2.default.join(staticSrcPath, 'index.html');
+  const htmlFile = _path2.default.join(config.serveStaticPath, 'index.html');
   console.log(`configuring html wildcard route ${ htmlFile }`);
   app.use((req, res) => {
     res.sendFile(htmlFile);
   });
-
-  console.log('configuring apiRoutes');
-  app.use('/api/', _api2.default);
 
   console.log('configuring error handlers');
   app.use((0, _error2.default)(app));

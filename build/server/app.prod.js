@@ -12,9 +12,9 @@ var _app = require('./app');
 
 var _app2 = _interopRequireDefault(_app);
 
-var _webpack = require('../../webpack.config');
+var _config = require('../../config.prod');
 
-var _webpack2 = _interopRequireDefault(_webpack);
+var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24,9 +24,8 @@ const port = Number(process.env.PORT || defaultPort);
 const appUrl = process.env.APP_URL || `http://localhost:${ port }/`;
 
 app = (0, _app2.default)(app, {
-  webpackConfig: _webpack2.default,
-  loggerLevel: 'combined',
-  staticSrcPath: _webpack2.default.buildPath
+  config: _config2.default,
+  loggerLevel: 'combined'
 });
 // start app
 app.listen(port, error => {
