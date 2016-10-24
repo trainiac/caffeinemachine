@@ -15,7 +15,7 @@
     "develop": "npm run clean && babel-node --debug server/app.dev.js",
     "clean": "rm -rf build && mkdir build",
     "build-server": "babel -d ./build/server ./server -s",
-    "build-client": "webpack --config webpack.prod.config.js",
+    "build-client": "webpack --config webpack.deploy.config.js",
     "build": "npm run clean && npm run build-server && npm run build-client",
     "start": "node ./build/server/app.prod.js",
     "prod": "npm run build && npm run start",
@@ -47,8 +47,7 @@
     "react-router-redux": "4.0.6",
     "redux": "3.6.0",
     "redux-thunk": "2.1.0",
-    "serve-favicon": "2.3.0",
-    "webpack": "1.13.2"
+    "serve-favicon": "2.3.0"
   },
   "main": "server/app.js",
   "keywords": [
@@ -82,6 +81,7 @@
     "redux-logger": "2.7.0",
     "should": "4.6.5",
     "sinon": "1.17.6",
+    "webpack": "1.13.2",
     "webpack-dev-middleware": "1.8.4",
     "webpack-hot-middleware": "2.13.0"
   },

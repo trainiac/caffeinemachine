@@ -1,7 +1,7 @@
 /* eslint-disable no-var */
 
 var webpack = require('webpack')
-var config = require('./webpack.config.js')
+var config = require('./webpack.build.config.js')
 
 config.plugins.push(new webpack.DefinePlugin({
   'process.env': {

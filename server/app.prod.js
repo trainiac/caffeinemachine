@@ -1,6 +1,6 @@
 import express from 'express'
 import configureApp from './app'
-import webpackConfig from '../../webpack.prod.config'
+import webpackConfig from '../../webpack.config'
 
 let app = express()
 const defaultPort = 5000
