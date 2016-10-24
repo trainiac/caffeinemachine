@@ -1,5 +1,5 @@
 import 'babel-polyfill'
-import styles from './styles/index' // eslint-disable-line no-unused-vars
+import css from './static/css/index' // eslint-disable-line no-unused-vars
 import React from 'react'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'

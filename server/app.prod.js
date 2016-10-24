@@ -6,8 +6,12 @@ let app = express()
 const defaultPort = 5000
 const port = Number(process.env.PORT || defaultPort)
 const appUrl = process.env.APP_URL || `http://localhost:${port}/`
-app = configureApp(app, webpackConfig, 'combined')
 
+app = configureApp(app, {
+  webpackConfig,
+  loggerLevel: 'combined',
+  staticSrcPath: webpackConfig.buildPath
+})
 // start app
 app.listen(port, error => {
   if (error) {

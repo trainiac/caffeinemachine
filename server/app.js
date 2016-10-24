@@ -9,31 +9,14 @@ import apiRoutes from './routes/api'
 import getErrorHandlers from './routes/error'
 
 
-const getAppRoutes = app => {
-  const routes = []
-
-  app._router.stack.forEach(middleware => { // eslint-disable-line no-underscore-dangle
-    if (middleware.route) { // routes registered directly on the app
-      routes.push(middleware.route)
-    } else if (middleware.name === 'router') { // router middleware
-      middleware.handle.stack.forEach(handler => {
-        if (handler.route) {
-          routes.push(handler.route)
-        }
-      })
-    }
-  })
-
-  return routes
-}
-
-export default (app, webpackConfig, logLevel) => {
-  const faviconFile = path.join(webpackConfig.buildPath, 'favicon.ico')
+export default (app, settings) => {
+  const { webpackConfig, staticSrcPath, loggerLevel } = settings
+  const faviconFile = path.join(staticSrcPath, 'favicon.ico')
   console.log(`configuring favicon ${faviconFile}`)
   app.use(favicon(faviconFile))
 
-  console.log(`configuring logger ${logLevel}`)
-  app.use(logger(logLevel))
+  console.log(`configuring logger ${loggerLevel}`)
+  app.use(logger(loggerLevel))
 
   console.log('configuring bodyParser')
   app.use(bodyParser.json())
@@ -57,7 +40,7 @@ export default (app, webpackConfig, logLevel) => {
   // the public path is defined in webpack.config.js
 
 
-  const htmlFile = path.join(webpackConfig.buildPath, 'index.html')
+  const htmlFile = path.join(staticSrcPath, 'index.html')
   console.log(`configuring html wildcard route ${htmlFile}`)
   app.use((req, res) => {
     res.sendFile(htmlFile)
@@ -70,7 +53,6 @@ export default (app, webpackConfig, logLevel) => {
   console.log('configuring error handlers')
   app.use(getErrorHandlers(app))
 
-  console.log(getAppRoutes(app))
   return app
 }
 

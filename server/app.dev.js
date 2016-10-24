@@ -25,7 +25,11 @@ app.use(
 
 console.log('configuring webpack hot reloader')
 app.use(webpackHotMiddleware(compiler))
-app = configureApp(app, webpackConfig, 'dev')
+app = configureApp(app, {
+  webpackConfig,
+  loggerLevel: 'dev',
+  staticSrcPath: webpackConfig.staticSrcPath
+})
 // start app
 app.listen(port, error => {
   if (error) {

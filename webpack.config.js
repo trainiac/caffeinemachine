@@ -12,6 +12,7 @@ module.exports = {
   buildPath: buildPath,
   clientSrcPath: clientSrcPath,
   clientBuildPath: clientBuildPath,
+  staticSrcPath: staticSrcPath,
   entry: [
     path.join(clientSrcPath, 'app.js')
   ],

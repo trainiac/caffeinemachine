@@ -59,7 +59,7 @@
         "default-case": "error",
         "dot-location": [
             "error",
-            "object"
+            "property"
         ],
         "dot-notation": "error",
         "eqeqeq": "error",
@@ -221,7 +221,7 @@
         "id-length": [
             "error",
             {
-                "exceptions": ["e"]
+                "exceptions": ["e", "_"]
             }
         ],
         "id-match": "off",
