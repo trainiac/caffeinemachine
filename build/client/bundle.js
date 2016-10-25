@@ -39589,13 +39589,60 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: _CaffeineMachineStyles2.default.slotMachineTop },
+	          _react2.default.createElement(
+	            'div',
+	            { className: _CaffeineMachineStyles2.default.topLights },
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.topLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.topLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.topLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.topLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.topLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.topLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.topLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.topLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.topLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.topLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.topLight(isPlaying) })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: _CaffeineMachineStyles2.default.leftLights },
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: _CaffeineMachineStyles2.default.rightLights },
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) }),
+	            _react2.default.createElement('div', { className: _CaffeineMachineStyles2.default.verticalLight(isPlaying) })
+	          ),
 	          _react2.default.createElement(_Banner2.default, { isPlaying: isPlaying }),
 	          _react2.default.createElement(_Slots2.default, { slots: slots, results: results, isPlaying: isPlaying }),
 	          _react2.default.createElement(
 	            'div',
 	            { className: _CaffeineMachineStyles2.default.buttonContainer },
 	            _react2.default.createElement(_MachineButton2.default, { onPlay: function onPlay() {
-	                return _onPlay(playDuration);
+	                return !isPlaying && _onPlay(playDuration);
 	              }, isPlaying: isPlaying })
 	          )
 	        ),
@@ -39657,7 +39704,7 @@
 	    var onPlay = _ref.onPlay;
 	    return _react2.default.createElement(
 	        'button',
-	        { onClick: onPlay, className: _MachineButton2.default.machineButton },
+	        { onClick: onPlay, className: _MachineButton2.default.machineButton(isPlaying) },
 	        'Play'
 	    );
 	};
@@ -39695,16 +39742,23 @@
 	  machineButton: {
 	    backgroundColor: '#3f93f3',
 	    textTransform: 'uppercase',
-	    ':hover': {
-	      backgroundColor: '#287ddd'
-	    },
+	    outline: 'none',
 	    color: 'white',
 	    fontSize: 20,
 	    borderRadius: 6,
 	    border: 'none',
 	    padding: '20px 15px 20px 25px',
 	    letterSpacing: 10,
-	    fontFamily: '"Bungee Inline", cursive'
+	    fontFamily: '"Bungee Inline", cursive',
+	    getState: function getState(isPlaying) {
+	      return [!isPlaying && 'state.pulse'];
+	    },
+
+	    states: {
+	      pulse: {
+	        '-webkit-animation': 'pulseButton 2s infinite'
+	      }
+	    }
 	  }
 	};
 
@@ -39974,7 +40028,7 @@
 	  slotsContainer: {
 	    padding: '10px 15px',
 	    backgroundColor: 'silver',
-	    marginBottom: 20,
+	    marginBottom: 40,
 	    borderRadius: 10
 	  },
 	  innerSlotContainer: {
@@ -39998,7 +40052,7 @@
 	  },
 	  outcomeReel: {
 	    position: 'absolute',
-	    top: 0,
+	    top: 10,
 	    left: 0,
 	    '-webkit-transform': 'translate3d(0, 0, 0)',
 	    getState: function getState(isPlaying) {
@@ -40116,19 +40170,19 @@
 
 	var prizeImgProps = {
 	  COFFEE: {
-	    alt: 'Coffee Maker',
-	    title: 'Coffee Maker',
-	    src: '/static/images/coffeemaker.jpg'
+	    alt: 'Cup of coffee',
+	    title: 'Cup of coffee',
+	    src: '/static/images/coffee-cup.jpg'
 	  },
 	  TEA: {
-	    alt: 'Tea Pot',
-	    title: 'Tea Pot',
-	    src: '/static/images/teapot.jpeg'
+	    alt: 'Cup of tea',
+	    title: 'Cup of tea',
+	    src: '/static/images/tea.jpg'
 	  },
 	  ESPRESSO: {
-	    alt: 'Espresso Beans',
-	    title: 'Espresso Beans',
-	    src: '/static/images/espressobeans.jpg'
+	    alt: 'Espresso',
+	    title: 'Espresso',
+	    src: '/static/images/espresso.jpg'
 	  }
 	};
 
@@ -40235,8 +40289,8 @@
 	  prize: {
 	    transition: 'top 1s linear',
 	    position: 'absolute',
-	    top: '100%',
-	    margin: '0 0 0 -50px',
+	    top: '110%',
+	    margin: '-50px 0 0 -50px',
 	    left: '50%',
 	    zIndex: 1,
 	    height: 100,
@@ -40244,7 +40298,7 @@
 	    '-webkit-transform': 'translate3d(0, 0, 0)',
 	    states: {
 	      appear: {
-	        top: '10%'
+	        top: '50%'
 	      }
 	    },
 	    getState: function getState(isPlaying, beverageWon) {
@@ -40351,6 +40405,8 @@
 	var slotMachineWidth = 600;
 	var slotMachineHeight = 600;
 	var padding = 50;
+	var lightSize = 14;
+
 	var styles = {
 	  slotMachine: {
 	    position: 'absolute',
@@ -40364,9 +40420,10 @@
 	  slotMachineTop: {
 	    backgroundColor: '#df3a3f',
 	    padding: padding,
-	    width: '70%',
+	    width: '68%',
 	    margin: '0 auto',
-	    borderRadius: '10px 10px 0 0'
+	    borderRadius: '10px 10px 0 0',
+	    position: 'relative'
 	  },
 	  slotMachineBottom: {
 	    backgroundColor: '#df3a3f',
@@ -40377,6 +40434,74 @@
 	  },
 	  buttonContainer: {
 	    textAlign: 'center'
+	  },
+	  topLights: {
+	    position: 'absolute',
+	    top: 0,
+	    left: 50,
+	    right: -50,
+	    width: '100%',
+	    height: padding,
+	    lineHeight: padding - 1 + 'px'
+	  },
+	  leftLights: {
+	    position: 'absolute',
+	    top: 12,
+	    left: 0,
+	    height: '100%',
+	    width: 30,
+	    textAlign: 'center',
+	    padding: '0 10px'
+	  },
+	  rightLights: {
+	    position: 'absolute',
+	    top: 12,
+	    right: 0,
+	    height: '100%',
+	    width: 30,
+	    textAlign: 'center',
+	    padding: '0 10px'
+	  },
+	  topLight: {
+	    background: 'yellow',
+	    padding: lightSize,
+	    borderRadius: lightSize,
+	    display: 'inline-block',
+	    margin: '0 10px 0 0',
+	    verticalAlign: 'middle',
+	    opacity: '0.5',
+	    getState: function getState(isPlaying) {
+	      return [isPlaying && 'state.blink'];
+	    },
+
+	    states: {
+	      blink: {
+	        '-webkit-animation-name': 'blinkLight',
+	        '-webkit-animation-timing-function': 'linear',
+	        '-webkit-animation-iteration-count': 'infinite',
+	        '-webkit-animation-duration': '0.5s'
+	      }
+	    }
+	  },
+	  verticalLight: {
+	    background: 'yellow',
+	    padding: lightSize,
+	    borderRadius: lightSize,
+	    margin: '0 0 10px 0px',
+	    display: 'block',
+	    opacity: '0.5',
+	    getState: function getState(isPlaying) {
+	      return [isPlaying && 'state.blink'];
+	    },
+
+	    states: {
+	      blink: {
+	        '-webkit-animation-name': 'blinkLight',
+	        '-webkit-animation-timing-function': 'linear',
+	        '-webkit-animation-iteration-count': 'infinite',
+	        '-webkit-animation-duration': '0.5s'
+	      }
+	    }
 	  }
 	};
 
@@ -40395,6 +40520,8 @@
 	  __REACT_HOT_LOADER__.register(slotMachineHeight, 'slotMachineHeight', '/Users/adrian/Documents/CaffeineMachine/client/containers/CaffeineMachine.styles.js');
 
 	  __REACT_HOT_LOADER__.register(padding, 'padding', '/Users/adrian/Documents/CaffeineMachine/client/containers/CaffeineMachine.styles.js');
+
+	  __REACT_HOT_LOADER__.register(lightSize, 'lightSize', '/Users/adrian/Documents/CaffeineMachine/client/containers/CaffeineMachine.styles.js');
 
 	  __REACT_HOT_LOADER__.register(styles, 'styles', '/Users/adrian/Documents/CaffeineMachine/client/containers/CaffeineMachine.styles.js');
 

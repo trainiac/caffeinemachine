@@ -3,19 +3,19 @@ import classNames from './PrizeDispenser.styles'
 
 const prizeImgProps = {
   COFFEE: {
-    alt: 'Coffee Maker',
-    title: 'Coffee Maker',
-    src: '/static/images/coffeemaker.jpg'
+    alt: 'Cup of coffee',
+    title: 'Cup of coffee',
+    src: '/static/images/coffee-cup.jpg'
   },
   TEA: {
-    alt: 'Tea Pot',
-    title: 'Tea Pot',
-    src: '/static/images/teapot.jpeg'
+    alt: 'Cup of tea',
+    title: 'Cup of tea',
+    src: '/static/images/tea.jpg'
   },
   ESPRESSO: {
-    alt: 'Espresso Beans',
-    title: 'Espresso Beans',
-    src: '/static/images/espressobeans.jpg'
+    alt: 'Espresso',
+    title: 'Espresso',
+    src: '/static/images/espresso.jpg'
   }
 }
 

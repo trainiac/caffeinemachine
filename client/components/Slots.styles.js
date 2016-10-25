@@ -5,7 +5,7 @@ const styles = {
   slotsContainer: {
     padding: '10px 15px',
     backgroundColor: 'silver',
-    marginBottom: 20,
+    marginBottom: 40,
     borderRadius: 10
   },
   innerSlotContainer: {
@@ -29,7 +29,7 @@ const styles = {
   },
   outcomeReel: {
     position: 'absolute',
-    top: 0,
+    top: 10,
     left: 0,
     '-webkit-transform': 'translate3d(0, 0, 0)',
     getState(isPlaying) {

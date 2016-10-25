@@ -54,8 +54,8 @@ const styles = {
   prize: {
     transition: 'top 1s linear',
     position: 'absolute',
-    top: '100%',
-    margin: '0 0 0 -50px',
+    top: '110%',
+    margin: '-50px 0 0 -50px',
     left: '50%',
     zIndex: 1,
     height: 100,
@@ -63,7 +63,7 @@ const styles = {
     '-webkit-transform': 'translate3d(0, 0, 0)',
     states: {
       appear: {
-        top: '10%'
+        top: '50%'
       }
     },
     getState(isPlaying, beverageWon) {

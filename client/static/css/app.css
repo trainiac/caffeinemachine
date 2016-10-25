@@ -4,7 +4,24 @@
 
 /* WebKit and Opera browsers */
 @-webkit-keyframes spinner {
-  from { top: 0px;    }
-  to   { top: -240px; }
+  from { top: 10px;    }
+  to   { top: -250px; }
 }
 
+@-webkit-keyframes blinkLight {
+  0%   { opacity: 0.5;  }
+  50%  { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+@-webkit-keyframes pulseButton {
+  0% {
+    background-color: #3f93f3;
+  }
+  50% {
+    background-color: #287ddd;
+  }
+  100% {
+    background-color: #3f93f3;
+  }
+}
